@@ -36,6 +36,7 @@ def signal_handler(sig, frame):
 
 
 signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGKILL, signal_handler)
 
 while True:
     sleep_until_exact_time()
