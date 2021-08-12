@@ -23,7 +23,7 @@ def sleep_until_exact_time():
 
 def save_weather():
     temperature, pressure, humidity = bme280.readBME280All()
-    # print(f"Temp : {temperature}°C \t P : {pressure}hPa \t HR : {humidity}%")
+    print(f"Temp : {temperature}°C \t P : {pressure}hPa \t HR : {humidity}%")
     _now = datetime.utcnow()
     data = dict(date=_now, temperature=temperature, pressure=pressure, humidity=humidity)
     table.insert(data)
