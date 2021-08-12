@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 nohup.out
-*.db
+*.db*
 .idea
