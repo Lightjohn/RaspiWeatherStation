@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+import signal
+import sys
+from datetime import datetime, timedelta
 from time import sleep
 
-import bme280
-
 import dataset
-from datetime import datetime, timedelta
+
+import bme280
 
 SLEEP_TIME = 5  # Every X min
 db = dataset.connect('sqlite:///weather.db')
@@ -27,6 +29,13 @@ def save_weather():
     table.insert(data)
     sleep_until_exact_time()
 
+
+def signal_handler(sig, frame):
+    db.close()
+    sys.exit(0)
+
+
+signal.signal(signal.SIGINT, signal_handler)
 
 while True:
     sleep_until_exact_time()
