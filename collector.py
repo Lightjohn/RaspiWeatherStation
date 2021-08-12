@@ -31,6 +31,7 @@ def save_weather():
 
 
 def signal_handler(sig, frame):
+    print("Closing DB")
     db.close()
     sys.exit(0)
 
