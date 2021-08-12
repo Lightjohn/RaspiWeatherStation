@@ -27,7 +27,6 @@ def save_weather():
     _now = datetime.utcnow()
     data = dict(date=_now, temperature=temperature, pressure=pressure, humidity=humidity)
     table.insert(data)
-    sleep_until_exact_time()
 
 
 def signal_handler(sig, frame):
