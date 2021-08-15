@@ -9,8 +9,6 @@ import dataset
 import bme280
 
 SLEEP_TIME = 5  # Every X min
-db = dataset.connect('sqlite:///weather.db')
-table = db['weather']
 
 
 def sleep_until_exact_time():
@@ -22,16 +20,18 @@ def sleep_until_exact_time():
 
 
 def save_weather():
+    db = dataset.connect('sqlite:///weather.db')
+    table = db['weather']
     temperature, pressure, humidity = bme280.readBME280All()
     print(f"Temp : {temperature}°C \t P : {pressure}hPa \t HR : {humidity}%")
     _now = datetime.utcnow()
     data = dict(date=_now, temperature=temperature, pressure=pressure, humidity=humidity)
     table.insert(data)
+    db.close()
 
 
 def signal_handler(sig, frame):
-    print("Closing DB")
-    db.close()
+    print("Bye")
     sys.exit(0)
 
 
